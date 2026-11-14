@@ -68,7 +68,9 @@ Configuration, all of it in the **calling** repo:
 | Where | Name | Value |
 |---|---|---|
 | Repo root | `compose.yml` | the service's compose; at least one `image:` carries the release tag `vX.Y.Z` (release-please's annotated `image:` lines). Every deploy stores it in Dokploy as raw source, so an edit in Dokploy's UI lasts only until the next deploy |
-| Org variable | `DOKPLOY_BASE_URL` | the Dokploy instance, HTTPS |
+| Org variable | `DOKPLOY_BASE_URL` | the Dokploy instance, HTTPS - reachable from the tailnet |
+| Org variable | `TS_OAUTH_CLIENT_ID` | Tailscale OAuth client the job joins the tailnet with (scope Auth Keys: write, tag `tag:ci`); Dokploy's API is reachable only inside the tailnet |
+| Org secret | `TS_OAUTH_SECRET` | its secret |
 | Environment `production`, secret | `DOKPLOY_API_KEY` | API key of the deploying Dokploy user |
 | Environment `production`, variable | `DOKPLOY_COMPOSE_ID` | id of the compose service |
 | Environment `production`, variable | `HEALTH_URL` | `GET` endpoint answering `{"status": "ok", "version": "X.Y.Z"}`; leave it unset for a service without HTTP - the deployment status is then the whole verification |
